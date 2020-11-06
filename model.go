@@ -5,14 +5,15 @@ import (
 	"strings"
 )
 
+// Model is an interface for ClickHouse data structures.
 type Model interface {
 	GetFields() []string
 	GetValues() []interface{}
 	TableName() string
 }
 
-// PrepareInsertionSQL подготавливает SQL prepare statement для вставки записей
-// в базу данных.
+// PrepareInsertionSQL prepares a SQL prepare statement to insert records
+// into the database.
 func PrepareInsertionSQL(model Model) string {
 	fields := model.GetFields()
 	binds := strings.Repeat("?,", len(fields))
